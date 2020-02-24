@@ -1,0 +1,64 @@
+package com.capgemini.report.dao;
+
+import com.capgemini.report.dto.Report;
+import com.capgemini.report.util.DatabaseUtil;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+public class ReportDaoImpl implements ReportDao{
+
+	Connection connection;
+	Statement st;
+	ResultSet rs;
+	PreparedStatement pst;
+	Report info;
+
+	ArrayList<Report> ar;
+
+	public ReportDaoImpl() throws SQLException {
+		connection = DatabaseUtil.myconnection();
+		connection.setAutoCommit(false);
+	}
+
+	
+	@Override
+	public ArrayList<Report> getMonthlyReport(int Month) throws SQLException {
+		pst = connection.prepareStatement
+				("select product_sold_date, product_price from RevenueReport where to_char(product_sold_date,'MM')=?");
+		pst.setInt(1,Month);
+		rs = pst.executeQuery();
+		
+		while (rs.next()) {
+				info = new Report();   
+				info.setProduct_Price(rs.getDouble(1));
+				info.setProduct_Sold_Date(rs.getDate(2));
+				ar.add(info);
+	}
+		return ar;
+	}
+		
+	@Override
+	public ArrayList<Report> getYearlyReport(int Year) throws SQLException {
+		pst = connection.prepareStatement
+				("select product_sold_date, product_price from RevenueReport where to_char(product_sold_date,'YYYY')=?");
+		pst.setInt(1,Year);
+		rs = pst.executeQuery();
+		
+		while (rs.next()) {
+				info = new Report();   
+				info.setProduct_Price(rs.getDouble(1));
+				info.setProduct_Sold_Date(rs.getDate(2));
+				ar.add(info);
+	}
+		return ar;
+		
+	}
+
+}
+
+	

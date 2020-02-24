@@ -1,0 +1,72 @@
+package com.capgemini.report.dto;
+
+import java.util.Date;
+
+public class Report {
+
+	private String User_Id;
+	private Date Product_Sold_Date;
+	private String Order_Id;
+	private int Product_Id;
+	private String Product_Category;
+	private double Product_Price;
+	@Override
+	public String toString() {
+		return "Report [User_Id=" + User_Id + ", Product_Sold_Date=" + Product_Sold_Date + ", Order_Id=" + Order_Id
+				+ ", Product_Id=" + Product_Id + ", Product_Category=" + Product_Category + ", Product_Price="
+				+ Product_Price + "]";
+	}
+	public Report(String user_Id, Date product_Sold_Date, String order_Id, int product_Id, String product_Category,
+			double product_Price) {
+		super();
+		User_Id = user_Id;
+		Product_Sold_Date = product_Sold_Date;
+		Order_Id = order_Id;
+		Product_Id = product_Id;
+		Product_Category = product_Category;
+		Product_Price = product_Price;
+	}
+	
+	public void setUser_Id(String user_Id) {
+		User_Id = user_Id;
+	}
+	public void setProduct_Sold_Date(Date product_Sold_Date) {
+		Product_Sold_Date = product_Sold_Date;
+	}
+	public void setOrder_Id(String order_Id) {
+		Order_Id = order_Id;
+	}
+	public void setProduct_Id(int product_Id) {
+		Product_Id = product_Id;
+	}
+	public void setProduct_Category(String product_Category) {
+		Product_Category = product_Category;
+	}
+	public void setProduct_Price(double product_Price) {
+		Product_Price = product_Price;
+	}
+	public Report() {
+		
+	}
+	
+	public String getUser_Id() {
+		return User_Id;
+	}
+	public Date getProduct_Sold_Date() {
+		return Product_Sold_Date;
+	}
+	public String getOrder_Id() {
+		return Order_Id;
+	}
+	public int getProduct_Id() {
+		return Product_Id;
+	}
+	public String getProduct_Category() {
+		return Product_Category;
+	}
+	public double getProduct_Price() {
+		return Product_Price;
+	}
+	
+	
+}

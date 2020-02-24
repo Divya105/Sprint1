@@ -1,0 +1,14 @@
+package com.capgemini.report.dao;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import com.capgemini.report.dto.Report;
+
+public interface ReportDao {
+
+	public ArrayList<Report>getMonthlyReport(int Month) throws SQLException;
+	public ArrayList<Report>getYearlyReport(int Year) throws SQLException;
+	
+
+}

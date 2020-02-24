@@ -1,0 +1,64 @@
+package com.capgemini.report.service;
+
+import com.capgemini.report.dao.ReportDao;
+import com.capgemini.report.dao.ReportDaoImpl;
+import com.capgemini.report.dto.Report;
+import com.capgemini.report.exception.ReportException;
+import java.sql.SQLException;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+public class ReportServiceImpl  implements ReportService{
+	ReportDao dao;
+	ArrayList<Report> ar;
+	Report info;
+	Double monthAggregate = 0.0;
+	Double yearAggregate = 0.0;
+	
+	Scanner scanner = new Scanner(System.in);
+
+	String Month,Year;
+	Double Product_Price;
+
+	@Override
+	public double getThisMonthlyReport(int Month) throws SQLException {
+		// TODO Auto-generated method stub
+		if(!(Month >= 1 || Month <= 12)) {
+			throw new ReportException("record does not exist");
+		}
+		else {
+		dao=new ReportDaoImpl();
+		ar=new ArrayList();
+		ar = dao.getMonthlyReport(Month);
+		for (Report info: ar) {
+			monthAggregate = monthAggregate + info.getProduct_Price();
+			System.out.println(info.getProduct_Price());
+		}
+		System.out.println("Month Aggregate = " + monthAggregate);
+		}
+		return Month;
+	}
+
+	@Override
+	public double getThisYearlyReport(int Year) throws SQLException {
+		if(!(Year>2020)) {
+			throw new ReportException("record does not exist");
+		}
+		else {
+		dao=new ReportDaoImpl();
+		ar=new ArrayList();
+		ar = dao.getYearlyReport(Year);
+		for (Report info: ar) {
+			yearAggregate = yearAggregate + info.getProduct_Price();
+			System.out.println(info.getProduct_Price());
+		}
+		System.out.println("Year Aggregate = " + yearAggregate);
+		}
+		return  Year;
+		// TODO Auto-generated method stub
+		
+	}}
